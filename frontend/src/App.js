@@ -1,9 +1,17 @@
-import React from "react";
+import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Header from "./Header";
 import { getApi } from "./Api";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-class App extends React.Component {
+// Implement React Router for page navigation
+// localhost.com/homepage
+// localhost.com/login
+// localhost.com/about
+// localhost.com/register
+
+class App extends Component {
   state = {
     users: [],
   };
@@ -14,23 +22,26 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Users get from backend api and the data is from
-            <a href="https://console.firebase.google.com/project/uts-gas/database/uts-gas/data/~2Fusers">
-              {" "}
-              firebase
-            </a>
-          </p>
-          {this.state.users.map((user) => (
-            <p>
-              {user.username} {user.email}
-            </p>
-          ))}
-        </header>
-      </div>
+      <Router>
+        <div className="app">
+          <Switch>
+            <Route path="/about">
+              <Header />
+              <h1>About Us Page</h1>
+            </Route>
+            <Route path="/login">
+              <h1>Login Page</h1>
+            </Route>
+            <Route path="/register">
+              <h1>Register Page</h1>
+            </Route>
+            <Route path="/">
+              <Header />
+              <h1>Homepage</h1>
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }
