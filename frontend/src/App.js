@@ -38,6 +38,39 @@ class App extends Component {
             <Route path="/">
               <Header />
               <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
+              <h1>Homepage</h1>
             </Route>
           </Switch>
         </div>
