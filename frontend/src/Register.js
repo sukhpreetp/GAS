@@ -73,6 +73,9 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginBottom: "100px",
   },
+  p: {
+    fontWeight: "bolder",
+  },
 }));
 
 export default function RegisterSide() {
@@ -143,7 +146,7 @@ export default function RegisterSide() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             /> */}
-              <p>
+              <p className={classes.p}>
                 By Clicking "Create Student Account", you Agree to our Terms of
                 Service and Privacy Policy.
               </p>
