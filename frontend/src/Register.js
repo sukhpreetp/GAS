@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     height: "80vh",
     backgroundImage: `url(${Background})`,
+    marginTop: 0,
     // paddingTop: '10vh'
   },
   extendedIcon: {
@@ -74,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignInSide() {
+export default function RegisterSide() {
   const classes = useStyles();
 
   return (
@@ -102,9 +103,20 @@ export default function SignInSide() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Student Login
+              Student Registration
             </Typography>
             <form className={classes.form} noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="studentid"
+                label="Student ID"
+                name="id"
+                type="number"
+                autoFocus
+              />
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -131,6 +143,10 @@ export default function SignInSide() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             /> */}
+              <p>
+                By Clicking "Create Student Account", you Agree to our Terms of
+                Service and Privacy Policy.
+              </p>
               <Button
                 type="submit"
                 fullWidth
@@ -138,17 +154,12 @@ export default function SignInSide() {
                 color="primary"
                 className={classes.submit}
               >
-                Sign In
+                Create Student Account
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item xs>
-                  <Link href="register" variant="body2">
-                    Don't have an account? Sign Up
+                  <Link href="loginpage" variant="body2">
+                    Already have an Account? Click here to Sign In.
                   </Link>
                 </Grid>
               </Grid>
@@ -158,78 +169,7 @@ export default function SignInSide() {
         {/* <Grid item xs={false} sm={1} md={2}>
       <img src={logo} />
       </Grid> */}
-        <Grid
-          item
-          xs={12}
-          sm={8}
-          md={5}
-          component={Paper}
-          elevation={20}
-          className={classes.backgroundWhite}
-        >
-          <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Adminstrator Login
-            </Typography>
-            <form className={classes.form} noValidate>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-              {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                Sign In
-              </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-              </Grid>
-            </form>
-          </div>
-        </Grid>
       </Grid>
-
-      <Button
-        variant="contained"
-        color="primary"
-        size="large"
-        className={classes.button}
-        startIcon={<HomeIcon />}
-      >
-        Home
-      </Button>
     </div>
   );
 }
