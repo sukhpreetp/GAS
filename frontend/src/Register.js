@@ -20,7 +20,6 @@ import AppBar from "@material-ui/core/AppBar";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "80vh",
-    backgroundImage: `url(${Background})`,
     marginTop: 0,
     // paddingTop: '10vh'
   },
@@ -173,6 +172,17 @@ export default function RegisterSide() {
       <img src={logo} />
       </Grid> */}
       </Grid>
+      <Link href="/home" variants="body2">
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          className={classes.button}
+          startIcon={<HomeIcon />}
+        >
+          Home
+        </Button>
+      </Link>
     </div>
   );
 }
