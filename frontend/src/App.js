@@ -4,6 +4,7 @@ import "./App.css";
 import { getApi } from "./Api";
 import SignInSide from "../src/loginPage";
 import RegisterSide from "../src/Register";
+import EnhancedTable from "../src/viewStudentInfo";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 
 class App extends React.Component {
@@ -38,6 +39,7 @@ class App extends React.Component {
             {/* <Route exact path="/" component={Home} /> */}
             <Route path="/loginpage" component={SignInSide} />
             <Route path="/register" component={RegisterSide} />
+            <Route path="/viewStudentInfo" component={EnhancedTable} />
           </Switch>
         </BrowserRouter>
       </div>
