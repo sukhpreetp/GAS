@@ -20,7 +20,6 @@ import AppBar from "@material-ui/core/AppBar";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "80vh",
-    backgroundImage: `url(${Background})`,
     marginTop: 0,
     // paddingTop: '10vh'
   },
@@ -72,6 +71,9 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     marginBottom: "100px",
+  },
+  p: {
+    fontWeight: "bolder",
   },
 }));
 
@@ -143,7 +145,7 @@ export default function RegisterSide() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             /> */}
-              <p>
+              <p className={classes.p}>
                 By Clicking "Create Student Account", you Agree to our Terms of
                 Service and Privacy Policy.
               </p>
@@ -170,6 +172,17 @@ export default function RegisterSide() {
       <img src={logo} />
       </Grid> */}
       </Grid>
+      <Link href="/home" variants="body2">
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          className={classes.button}
+          startIcon={<HomeIcon />}
+        >
+          Home
+        </Button>
+      </Link>
     </div>
   );
 }
