@@ -21,6 +21,7 @@ import Switch from '@material-ui/core/Switch';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Background from "./blue.jpg";
+import CreateGroup from './groupConfirmation.js';
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -183,9 +184,10 @@ const EnhancedTableToolbar = (props) => {
 
       {numSelected > 0 ? (
         <Tooltip title="Create Group">
-          <IconButton aria-label="Create Group" >
+          {/* <IconButton aria-label="Create Group" >
             <GroupAddIcon className={classes.icon} fontSize="large" />
-          </IconButton>
+          </IconButton> */}
+          <CreateGroup />
         </Tooltip>
       ) 
       : (
@@ -212,6 +214,8 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     marginBottom: theme.spacing(2),
+    boxShadow: 12,
+    borderColor: 'red'
     // paddingTop: '30vh'
   },
   table: {
@@ -308,7 +312,7 @@ export default function StudentTable() {
         <div className={classes.space}>
 
         </div> 
-      <Paper className={classes.paper}>
+      <Paper className={classes.paper}  elevation={15}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
@@ -363,9 +367,9 @@ export default function StudentTable() {
                   );
                 })}
               {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                <StyledTableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
                   <TableCell colSpan={6} />
-                </TableRow>
+                </StyledTableRow>
               )}
             </TableBody>
           </Table>

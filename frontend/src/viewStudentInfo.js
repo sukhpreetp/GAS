@@ -21,6 +21,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
 import StudentTable from './studentInfoTable.js';
 
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -174,9 +175,9 @@ export default function EnhancedTable() {
             
             {/* Recent Orders */}
             <Grid item xs={12}>
-              <Paper className={classes.paper}>
+              {/* <Paper className={classes.paper}> */}
                 <StudentTable />
-              </Paper>
+              {/* </Paper> */}
             </Grid>
           </Grid>
           <Box pt={4}>
