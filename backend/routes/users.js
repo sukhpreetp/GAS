@@ -6,7 +6,7 @@ var md5 = require('md5');
 router.get('/', function (req, res, next) {
 	const userRef = db.ref('users/');
 	const users = userRef.once('value')
-		.then(data=> {
+		.then(data => {
 			const userArr = [];
 			data = data.val();
 			for (var key of Object.keys(data)) {
@@ -33,7 +33,7 @@ router.post('/', function (req, res, next) {
 
 /* GET users listing. */
 router.post('/:userId/skills', function (req, res, next) {
-	const userRef = db.ref('users/'+req.params.userId);
+	const userRef = db.ref('users/' + req.params.userId);
 	let data = {
 		skills: req.body.skills,
 	}
@@ -41,5 +41,47 @@ router.post('/:userId/skills', function (req, res, next) {
 	res.send("success");
 });
 
+
+/* Add users topic. */
+router.post('/:userId/topics', function (req, res, next) {
+	const userRef = db.ref('users/' + req.params.userId);
+	userRef.once('value')
+		.then(data => {
+			const currentUser = data.val();
+			currentUser.topics = currentUser.topics ? currentUser.topics : [];
+			let exists = false;
+			for (let i = 0; i < currentUser.topics.length; i++) {
+				if (currentUser.topics[i].topicId === req.body.topic.id) {
+					exists = true;
+				}
+			}
+			if (!exists) {
+				currentUser.topics.push({
+					topicId: req.body.topic.id,
+					topicName: req.body.topic.name,
+					role: req.body.role,
+				});
+				const topicRef = db.ref('topics/' + req.body.topic.id + '/candidates');
+				topicRef.once('value').then(data => {
+					const candidates = data.val() ? data.val() : [];
+					candidates.push({
+						user: {
+							id: req.params.userId,
+							email: currentUser.email,
+						},
+						role: req.body.role,
+						grouped: false,
+					});
+					userRef.set(currentUser).then(()=>{
+						topicRef.set(candidates).then(()=>{
+							res.send({result: "success"});
+						});
+					});
+				});
+			} else {
+				res.send({result: "failed", msg: "Duplicated topic in user."});
+			}
+		});
+});
 module.exports = router;
 

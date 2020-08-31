@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { getApi } from "./Api";
+import { getApi, postApi } from "./Api";
 import SignInSide from "../src/loginPage";
 import RegisterSide from "../src/Register";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
@@ -15,7 +15,12 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    getApi("/users").then((data) => this.setState({ users: data }));
+    /*postApi("/users", {
+      "studentId": "13423456",
+      "email": "krystian.test@uts.com",
+      "password": "12345678"
+    }).then((data) => console.log(data));*/
+    getApi("/users").then((data) => console.log(data));
   }
 
   render() {

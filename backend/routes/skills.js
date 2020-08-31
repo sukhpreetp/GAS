@@ -26,7 +26,7 @@ router.post('/', function (req, res, next) {
 });
 
 router.delete('/', function (req, res, next) {
-	const skillRef = db.ref('skills/');
+	const skillRef = db.ref('skills/'+req.body.type);
 	skillRef.once('value')
 		.then(currentSkills=>{
 			let skills = currentSkills.val();
