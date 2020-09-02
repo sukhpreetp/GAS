@@ -13,10 +13,10 @@ router.post('/', function (req, res, next) {
 				let user = data[key];
 				user.id = key;
 				if (user.password === md5(req.body.password)) {
-					res.send(user);
+					res.send({result:"success", user});
 				}
 			}
-		}).finally(() => res.send("Failed"));
+		}).finally(() => res.send({result:'failed', msg:'Incorrect username or password.'}));
 });
 
 module.exports = router;
