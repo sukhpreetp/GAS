@@ -28,7 +28,7 @@ router.post('/', function (req, res, next) {
 		type: 'student',
 	}
 	const newUser = userRef.push(data);
-	res.send(newUser.key);
+	res.send({result: "success"});
 });
 
 /* GET users listing. */

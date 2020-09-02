@@ -3,19 +3,16 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
-import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Fab from "@material-ui/core/Fab";
+import {makeStyles} from "@material-ui/core/styles";
 import HomeIcon from "@material-ui/icons/Home";
-import Background from "./blue.jpg";
-import AppBar from "@material-ui/core/AppBar";
+import {postApi} from "./Api";
+import {toast} from "react-toastify";
+import {Redirect} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,9 +76,40 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RegisterSide() {
   const classes = useStyles();
+  let [toLogin, setToLogin] = React.useState(false);
+  const handleSubmit = (event)=>{
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const body = {
+      studentId: data.get('id'),
+      email: data.get('email'),
+      password: data.get('password'),
+    };
+    postApi("/users", body).then(res => {
+      if(res.result === 'success'){
+        toast.success("Your registration was successful.", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
+        setToLogin(true);
+      } else {
+        toast.error("Submission failed.", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
+      }
+    });
+  };
 
   return (
     <div>
+      {toLogin && <Redirect to='/loginPage' />}
       <Grid
         container
         direction="row"
@@ -107,7 +135,7 @@ export default function RegisterSide() {
             <Typography component="h1" variant="h5">
               Student Registration
             </Typography>
-            <form className={classes.form} noValidate>
+            <form className={classes.form} noValidate onSubmit={handleSubmit}>
               <TextField
                 variant="outlined"
                 margin="normal"

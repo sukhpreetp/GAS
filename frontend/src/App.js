@@ -8,6 +8,8 @@ import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Header from "../src/Header";
 import Home from "./Home";
 import Footer from "./Footer";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends React.Component {
   state = {
@@ -20,7 +22,7 @@ class App extends React.Component {
       "email": "krystian.test@uts.com",
       "password": "12345678"
     }).then((data) => console.log(data));*/
-    getApi("/users").then((data) => console.log(data));
+    // getApi("/users").then((data) => console.log(data));
   }
 
   render() {
@@ -37,6 +39,7 @@ class App extends React.Component {
             </Route>
           </Switch>
         </BrowserRouter>
+        <ToastContainer />
       </div>
     );
   }
