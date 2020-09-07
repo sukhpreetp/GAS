@@ -16,11 +16,11 @@ import Fab from "@material-ui/core/Fab";
 import HomeIcon from "@material-ui/icons/Home";
 import Background from "./blue.jpg";
 import AppBar from "@material-ui/core/AppBar";
+import Header from "../src/Header";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "80vh",
-    backgroundImage: `url(${Background})`,
     // paddingTop: '10vh'
   },
   extendedIcon: {
@@ -220,16 +220,17 @@ export default function SignInSide() {
           </div>
         </Grid>
       </Grid>
-
-      <Button
-        variant="contained"
-        color="primary"
-        size="large"
-        className={classes.button}
-        startIcon={<HomeIcon />}
-      >
-        Home
-      </Button>
+      <Link href="/home" variants="body2">
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          className={classes.button}
+          startIcon={<HomeIcon />}
+        >
+          Home
+        </Button>
+      </Link>
     </div>
   );
 }

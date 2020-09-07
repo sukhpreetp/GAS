@@ -1,11 +1,16 @@
-import React from "react";
+import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { getApi } from "./Api";
+import { getApi, postApi } from "./Api";
 import SignInSide from "../src/loginPage";
 import RegisterSide from "../src/Register";
 import EnhancedTable from "../src/viewStudentInfo";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
+import Header from "../src/Header";
+import Home from "./Home";
+import Footer from "./Footer";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends React.Component {
   state = {
@@ -13,35 +18,26 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    getApi("/users").then((data) => this.setState({ users: data }));
+    /*postApi("/users", {
+      "studentId": "13423456",
+      "email": "krystian.test@uts.com",
+      "password": "12345678"
+    }).then((data) => console.log(data));*/
+    // getApi("/users").then((data) => console.log(data));
   }
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Users get from backend api and the data is from
-            <a href="https://console.firebase.google.com/project/uts-gas/database/uts-gas/data/~2Fusers">
-              {" "}
-              firebase
-            </a>
-          </p>
-          {this.state.users.map((user) => (
-            <p>
-              {user.username} {user.email}
-            </p>
-          ))}
-        </header>
         <BrowserRouter>
-          <Switch>
+         <Switch>
             {/* <Route exact path="/" component={Home} /> */}
             <Route path="/loginpage" component={SignInSide} />
             <Route path="/register" component={RegisterSide} />
             <Route path="/viewStudentInfo" component={EnhancedTable} />
           </Switch>
         </BrowserRouter>
+        <ToastContainer />
       </div>
     );
   }
