@@ -9,6 +9,8 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import PersonIcon from '@material-ui/icons/Person';
 
 export const mainListItems = (
   <div>
@@ -33,19 +35,19 @@ export const secondaryListItems = (
     {/* <ListSubheader inset>Saved reports</ListSubheader> */}
     <ListItem button>
       <ListItemIcon>
+        <PersonIcon />
+      </ListItemIcon>
+      <ListItemText primary="Student Info" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary="Group Info" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Student Info" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <LayersIcon />
+        <ExitToAppIcon />
       </ListItemIcon>
       <ListItemText primary="Sign Out" />
     </ListItem>
