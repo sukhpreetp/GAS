@@ -4,6 +4,7 @@ import "./App.css";
 import { getApi, postApi } from "./Api";
 import SignInSide from "../src/loginPage";
 import RegisterSide from "../src/Register";
+import EnhancedTable from "../src/viewStudentInfo";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Header from "../src/Header";
 import Home from "./Home";
@@ -29,14 +30,11 @@ class App extends React.Component {
     return (
       <div className="App">
         <BrowserRouter>
-          <Switch>
+         <Switch>
             {/* <Route exact path="/" component={Home} /> */}
             <Route path="/loginpage" component={SignInSide} />
             <Route path="/register" component={RegisterSide} />
-            <Route path="/">
-              <Header />
-              <Home />
-            </Route>
+            <Route path="/viewStudentInfo" component={EnhancedTable} />
           </Switch>
         </BrowserRouter>
         <ToastContainer />
