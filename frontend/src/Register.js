@@ -79,13 +79,16 @@ export default function RegisterSide() {
   let [toLogin, setToLogin] = React.useState(false);
   const handleSubmit = (event)=>{
     event.preventDefault();
-    const data = new FormData(event.target);
+    const data = new FormData(event.target); //Get submitted form data.
+    //Build post body.
     const body = {
       studentId: data.get('id'),
       email: data.get('email'),
       password: data.get('password'),
     };
+    //Send api request in POST method.
     postApi("/users", body).then(res => {
+      //Use the response data.
       if(res.result === 'success'){
         toast.success("Your registration was successful.", {
           position: "top-center",
