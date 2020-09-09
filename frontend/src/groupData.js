@@ -19,9 +19,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
-import StudentTable from './studentInfoTable.js';
+import GroupTableV from './groupSummary.js';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-
 
 function Copyright() {
   return (
@@ -117,7 +116,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EnhancedTable() {
+export default function GroupTable() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -143,13 +142,8 @@ export default function EnhancedTable() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Manual Student Assigner Tool   
+            Group Information Summary
           </Typography>
-          {/* <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton> */}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -177,7 +171,7 @@ export default function EnhancedTable() {
             {/* Recent Orders */}
             <Grid item xs={12}>
               {/* <Paper className={classes.paper}> */}
-                <StudentTable />
+                <GroupTableV />
               {/* </Paper> */}
             </Grid>
           </Grid>
@@ -189,4 +183,3 @@ export default function EnhancedTable() {
     </div>
   );
 }
-

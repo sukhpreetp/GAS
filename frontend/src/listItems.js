@@ -11,18 +11,22 @@ import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PersonIcon from '@material-ui/icons/Person';
+import StudentTable from './studentData.js';
+import { Link } from 'react-router-dom';
+import AutorenewIcon from '@material-ui/icons/Autorenew';
+import EditIcon from '@material-ui/icons/Edit';
 
 export const mainListItems = (
   <div>
-    <ListItem button>
+    <ListItem button component={Link} to="/viewStudentInfo">
       <ListItemIcon>
-        <DashboardIcon />
+        <EditIcon />
       </ListItemIcon>
       <ListItemText primary="Manual Assigner" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <AutorenewIcon />
       </ListItemIcon>
       <ListItemText primary="Automatic Assigner" />
     </ListItem>
@@ -33,13 +37,13 @@ export const mainListItems = (
 export const secondaryListItems = (
   <div>
     {/* <ListSubheader inset>Saved reports</ListSubheader> */}
-    <ListItem button>
+    <ListItem button component={Link} to="/studentData">
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>
       <ListItemText primary="Student Info" />
     </ListItem>
-    <ListItem button>
+    <ListItem button button component={Link} to="/groupData">
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
