@@ -11,6 +11,8 @@ import Home from "./Home";
 import Footer from "./Footer";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import StudentTableV from './studentData.js';
+import GroupTable from './groupData.js';
 
 class App extends React.Component {
   state = {
@@ -35,6 +37,8 @@ class App extends React.Component {
             <Route path="/loginpage" component={SignInSide} />
             <Route path="/register" component={RegisterSide} />
             <Route path="/viewStudentInfo" component={EnhancedTable} />
+            <Route path="/studentData" component={StudentTableV} />
+            <Route path="/groupData" component={GroupTable} />
           </Switch>
         </BrowserRouter>
         <ToastContainer />
