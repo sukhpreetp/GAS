@@ -33,13 +33,13 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
          <Switch>
-            {/* <Route exact path="/" component={Home} /> */}
             <Route path="/loginpage" component={SignInSide} />
             <Route path="/register" component={RegisterSide} />
             <Route path="/viewStudentInfo" component={EnhancedTable} />
             <Route path="/studentData" component={StudentTableV} />
             <Route path="/groupData" component={GroupTable} />
-          </Switch>
+            <Route exact path="/" component={Home} />
+         </Switch>
         </BrowserRouter>
         <ToastContainer />
       </div>
