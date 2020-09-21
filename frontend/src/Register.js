@@ -8,17 +8,17 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import HomeIcon from "@material-ui/icons/Home";
-import {postApi} from "./Api";
-import {toast} from "react-toastify";
-import {Redirect} from "react-router-dom";
+import { postApi } from "./Api";
+import { toast } from "react-toastify";
+import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "80vh",
+    height: "110vh",
     marginTop: 0,
-    // paddingTop: '10vh'
+    paddingTop: "0vh",
   },
   extendedIcon: {
     marginRight: theme.spacing(1),
@@ -77,19 +77,19 @@ const useStyles = makeStyles((theme) => ({
 export default function RegisterSide() {
   const classes = useStyles();
   let [toLogin, setToLogin] = React.useState(false);
-  const handleSubmit = (event)=>{
+  const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target); //Get submitted form data.
     //Build post body.
     const body = {
-      studentId: data.get('id'),
-      email: data.get('email'),
-      password: data.get('password'),
+      studentId: data.get("id"),
+      email: data.get("email"),
+      password: data.get("password"),
     };
     //Send api request in POST method.
-    postApi("/users", body).then(res => {
+    postApi("/users", body).then((res) => {
       //Use the response data.
-      if(res.result === 'success'){
+      if (res.result === "success") {
         toast.success("Your registration was successful.", {
           position: "top-center",
           autoClose: 5000,
@@ -112,7 +112,7 @@ export default function RegisterSide() {
 
   return (
     <div>
-      {toLogin && <Redirect to='/loginPage' />}
+      {toLogin && <Redirect to="/loginPage" />}
       <Grid
         container
         direction="row"
@@ -148,6 +148,28 @@ export default function RegisterSide() {
                 label="Student ID"
                 name="id"
                 type="number"
+                autoFocus
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="studentid"
+                label="First Name"
+                name="name"
+                type="string"
+                autoFocus
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="studentid"
+                label="Last Name"
+                name="name"
+                type="string"
                 autoFocus
               />
               <TextField
