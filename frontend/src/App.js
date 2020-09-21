@@ -14,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import StudentTableV from './studentData.js';
 import GroupTable from './groupData.js';
 import StudentPreferences from './StudentPreferences';
+import Info from './Info';
 
 class App extends React.Component {
   state = {
@@ -39,6 +40,7 @@ class App extends React.Component {
             <Route path="/viewStudentInfo" component={EnhancedTable} />
             <Route path="/studentData" component={StudentTableV} />
             <Route path="/groupData" component={GroupTable} />
+            <Route path="/StuInfo" component={Info} />
             <Route path="/StudentPreferences" component={StudentPreferences} />
             <Route exact path="/" component={Home} />
          </Switch>

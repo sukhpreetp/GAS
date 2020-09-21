@@ -15,7 +15,6 @@ import StudentTable from './studentData.js';
 import { Link } from 'react-router-dom';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import EditIcon from '@material-ui/icons/Edit';
-import StudentPreferences from "../src/StudentPreferences";
 
 export const mainListItems = (
   <div>
@@ -33,6 +32,12 @@ export const mainListItems = (
       <ListItemText primary="Automatic Assigner" />
     </ListItem>
    
+    <ListItem button component={Link} to="/StuInfo">
+        <ListItemIcon>
+          <AssignmentIcon />
+        </ListItemIcon>
+        <ListItemText textDecoration="none" primary="My Information" />
+      </ListItem>
       <ListItem button component={Link} to="/StudentPreferences">
         <ListItemIcon>
           <AssignmentIcon />
