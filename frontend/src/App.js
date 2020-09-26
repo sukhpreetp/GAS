@@ -1,54 +1,67 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
+import React from "react";
 import "./App.css";
-import { getApi, postApi } from "./Api";
 import SignInSide from "../src/loginPage";
 import RegisterSide from "../src/Register";
 import EnhancedTable from "../src/viewStudentInfo";
-import { Route, Switch, BrowserRouter } from "react-router-dom";
-import Header from "../src/Header";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Home from "./Home";
-import Footer from "./Footer";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import StudentTableV from './studentData.js';
 import GroupTable from './groupData.js';
 import StudentPreferences from './StudentPreferences';
 import Info from './Info';
+import {userContext} from './userContext';
+import {createBrowserHistory} from "history";
+import {CookiesProvider} from 'react-cookie';
+import { withCookies, Cookies } from 'react-cookie';
+
+const history = createBrowserHistory();
 
 class App extends React.Component {
-  state = {
-    users: [],
-  };
+	constructor(props) {
+		super(props);
+		const user = this.props.cookies.get('currentUser');
+		this.state = {
+			user: user? user: {},
+		};
+	}
 
-  componentDidMount() {
-    /*postApi("/users", {
-      "studentId": "13423456",
-      "email": "krystian.test@uts.com",
-      "password": "12345678"
-    }).then((data) => console.log(data));*/
-    // getApi("/users").then((data) => console.log(data));
-  }
+	setUser = (user) => {
+		if(user) {
+			this.setState({user});
+			this.props.cookies.set('currentUser', JSON.stringify(user), { path: '/' });
+		}
+	}
 
-  render() {
-    return (
-      <div className="App">
-        <BrowserRouter>
-         <Switch>
-            <Route path="/loginpage" component={SignInSide} />
-            <Route path="/register" component={RegisterSide} />
-            <Route path="/viewStudentInfo" component={EnhancedTable} />
-            <Route path="/studentData" component={StudentTableV} />
-            <Route path="/groupData" component={GroupTable} />
-            <Route path="/StuInfo" component={Info} />
-            <Route path="/StudentPreferences" component={StudentPreferences} />
-            <Route exact path="/" component={Home} />
-         </Switch>
-        </BrowserRouter>
-        <ToastContainer />
-      </div>
-    );
-  }
+	render() {
+		const value = {
+			user: this.state.user,
+			setUser: this.setUser,
+		}
+
+		return (
+			<CookiesProvider>
+				<userContext.Provider value={value}>
+					<div className="App">
+						<BrowserRouter history={history}>
+							<Switch>
+								<Route path="/loginPage" component={SignInSide}/>
+								<Route path="/register" component={RegisterSide}/>
+								<Route path="/viewStudentInfo" component={EnhancedTable}/>
+								<Route path="/studentData" component={StudentTableV}/>
+								<Route path="/groupData" component={GroupTable}/>
+								<Route path="/StuInfo" component={Info}/>
+								<Route path="/StudentPreferences" component={StudentPreferences}/>
+								<Route exact path="/" component={Home}/>
+							</Switch>
+						</BrowserRouter>
+						<ToastContainer/>
+					</div>
+				</userContext.Provider>
+			</CookiesProvider>
+		);
+	}
 }
 
-export default App;
+export default withCookies(App);

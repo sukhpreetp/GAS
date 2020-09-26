@@ -25,20 +25,26 @@ router.post('/', function (req, res, next) {
 		studentId: req.body.studentId,
 		email: req.body.email,
 		password: md5(req.body.password),
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
 		type: 'student',
 	}
 	const newUser = userRef.push(data);
 	res.send({result: "success"});
 });
 
-/* GET users listing. */
-router.post('/:userId/skills', function (req, res, next) {
+router.put('/:userId', function (req, res, next) {
 	const userRef = db.ref('users/' + req.params.userId);
 	let data = {
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
 		skills: req.body.skills,
 	}
+	if (req.body.password) {
+		data.password = md5(req.body.password);
+	}
 	const newUser = userRef.update(data);
-	res.send("success");
+	res.send({result: "success"});
 });
 
 
@@ -72,8 +78,8 @@ router.post('/:userId/topics', function (req, res, next) {
 						role: req.body.role,
 						grouped: false,
 					});
-					userRef.set(currentUser).then(()=>{
-						topicRef.set(candidates).then(()=>{
+					userRef.set(currentUser).then(() => {
+						topicRef.set(candidates).then(() => {
 							res.send({result: "success"});
 						});
 					});
