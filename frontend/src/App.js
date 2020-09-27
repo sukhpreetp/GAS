@@ -15,6 +15,8 @@ import {userContext} from './userContext';
 import {createBrowserHistory} from "history";
 import {CookiesProvider} from 'react-cookie';
 import { withCookies, Cookies } from 'react-cookie';
+import studentDashboard from './studentDashboard.js';
+import StudentDashboard from "./studentDashboard.js";
 
 const history = createBrowserHistory();
 
@@ -53,6 +55,7 @@ class App extends React.Component {
 								<Route path="/groupData" component={GroupTable}/>
 								<Route path="/StuInfo" component={Info}/>
 								<Route path="/StudentPreferences" component={StudentPreferences}/>
+								<Route path="/StudentDashboard" component={StudentDashboard} />
 								<Route exact path="/" component={Home}/>
 							</Switch>
 						</BrowserRouter>

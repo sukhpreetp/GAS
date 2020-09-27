@@ -31,7 +31,11 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Automatic Assigner" />
     </ListItem>
-   
+  </div>
+);
+
+export const studentDashboard = (
+  <div>
     <ListItem button component={Link} to="/StuInfo">
         <ListItemIcon>
           <AssignmentIcon />
@@ -44,6 +48,12 @@ export const mainListItems = (
         </ListItemIcon>
         <ListItemText textDecoration="none" primary="My Preferences" />
       </ListItem>
+      <ListItem button>
+      <ListItemIcon>
+        <ExitToAppIcon />
+      </ListItemIcon>
+      <ListItemText primary="Sign Out" />
+    </ListItem>
   </div>
 );
 
