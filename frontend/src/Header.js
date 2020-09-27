@@ -35,7 +35,7 @@ function Header() {
             <span className="header_optionLineTwo">Registration</span>
           </div>
         </Link>
-        <Link to="/" className="header__link">
+        <Link to="/StudentDashboard" className="header__link">
           <div className="header__option">
             <span className="header_optionLineOne">Student</span>
             <span className="header_optionLineTwo">Dashboard</span>
