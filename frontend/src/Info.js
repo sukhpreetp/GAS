@@ -11,7 +11,7 @@ import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import {mainListItems, secondaryListItems} from "./listItems";
+import { mainListItems, secondaryListItems } from "./studentListItems";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";

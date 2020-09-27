@@ -8,9 +8,10 @@ import Home from "./Home";
 import Header from "../src/Header";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import StudentTableV from './studentData.js';
 import GroupTable from './groupData.js';
 import StudentPreferences from './StudentPreferences';
+import StudentData from './studentData';
+import StudentDashboard from './StudentDashboard';
 import Info from './Info';
 import {userContext} from './userContext';
 import {createBrowserHistory} from "history";
@@ -50,11 +51,12 @@ class App extends React.Component {
 								<Route path="/loginPage" component={SignInSide}/>
 								<Route path="/register" component={RegisterSide}/>
 								<Route path="/viewStudentInfo" component={EnhancedTable}/>
-								<Route path="/studentData" component={StudentTableV}/>
+								<Route path="/studentData" component={StudentData}/>
 								<Route path="/groupData" component={GroupTable}/>
+								<Route path="/StudentDashboard" component={StudentDashboard}/>
 								<Route path="/StuInfo" component={Info}/>
 								<Route path="/StudentPreferences" component={StudentPreferences}/>
-								<Route exact path="/" component={Home}>
+								<Route exact path="/home" component={Home}>
                 <Header />
                 <Home />
               </Route>
