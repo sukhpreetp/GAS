@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     height: "75vh",
   },
   backgroundWhite: {
-    height: "100vh",
+    height: "85vh",
   },
   fab: {
     backgroundColor: theme.palette.primary.main,
@@ -148,28 +148,6 @@ export default function RegisterSide() {
                 label="Student ID"
                 name="id"
                 type="number"
-                autoFocus
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="studentid"
-                label="First Name"
-                name="name"
-                type="string"
-                autoFocus
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="studentid"
-                label="Last Name"
-                name="name"
-                type="string"
                 autoFocus
               />
               <TextField

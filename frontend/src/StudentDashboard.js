@@ -10,19 +10,10 @@ import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
 import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import { BrowserRouter, Route } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems, secondaryListItems } from "./studentListItems";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import StudentPreferences from "../src/StudentPreferences";
-import { NavLink } from "react-router-dom";
-import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 
 function Copyright() {
@@ -128,7 +119,6 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <div className={classes.root}>
@@ -157,18 +147,8 @@ export default function Dashboard() {
             noWrap
             className={classes.title}
           >
-            Welcome To Your Dashboard, -
+            Welcome To Dashboard!
           </Typography>
-          <Link href="/home" variants="body2">
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              className={classes.button}
-            >
-              <ExitToAppIcon />
-            </Button>
-          </Link>
         </Toolbar>
       </AppBar>
       <Drawer

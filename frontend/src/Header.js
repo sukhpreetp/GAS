@@ -35,25 +35,6 @@ function Header() {
             <span className="header_optionLineTwo">Registration</span>
           </div>
         </Link>
-        <Link to="/StudentDashboard" className="header__link">
-          <div className="header__option">
-            <span className="header_optionLineOne">Student</span>
-            <span className="header_optionLineTwo">Dashboard</span>
-          </div>
-        </Link>
-        <Link to="/" className="header__link">
-          <div className="header__option">
-            <span className="header_optionLineOne">Your</span>
-
-            <span className="header_optionLineTwo">FAQ</span>
-          </div>
-        </Link>
-        <Link to="/" className="header__link">
-          <div className="header__option">
-            <span className="header_optionLineOne">Need Help?</span>
-            <span className="header_optionLineTwo">Contact Us</span>
-          </div>
-        </Link>
       </div>
     </nav>
   );

@@ -56,7 +56,7 @@ class App extends React.Component {
 								<Route path="/StudentDashboard" component={Dashboard}/>
 								<Route path="/StuInfo" component={Info}/>
 								<Route path="/StudentPreferences" component={StudentPreferences}/>
-								<Route exact path="/home" component={Home}>
+								<Route exact path="/" component={Home}>
                 <Header />
                 <Home />
               </Route>

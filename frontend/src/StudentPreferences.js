@@ -13,26 +13,12 @@ import Container from "@material-ui/core/Container";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { mainListItems, secondaryListItems } from "./studentListItems";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Button from "@material-ui/core/Button";
-import Link from "@material-ui/core/Link";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 
-function Copyright() {
-	return (
-		<Typography variant="body2" color="textSecondary" align="center">
-			{"Copyright © "}
-			<Link color="inherit" href="https://material-ui.com/">
-				Your Website
-			</Link>{" "}
-			{new Date().getFullYear()}
-			{"."}
-		</Typography>
-	);
-}
 
 const drawerWidth = 240;
 
@@ -124,7 +110,6 @@ export default function Dashboard() {
 	const handleDrawerClose = () => {
 		setOpen(false);
 	};
-	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
 	const [value, setValue] = React.useState('1. Online Shopping Website');
 	const handleChange = (event) => {
@@ -160,16 +145,7 @@ export default function Dashboard() {
 					>
 						Your Subject Preferences
 					</Typography>
-					<Link href="/home" variants="body2">
-						<Button
-							variant="contained"
-							color="primary"
-							size="large"
-							className={classes.button}
-						>
-							<ExitToAppIcon/>
-						</Button>
-					</Link>
+					
 				</Toolbar>
 			</AppBar>
 			<Drawer

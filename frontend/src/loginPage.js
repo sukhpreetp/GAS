@@ -95,7 +95,7 @@ export default function SignInSide() {
 				});
 				console.log(res.user);
 				setUser(res.user);
-				setJumpTo('/StuInfo');
+				setJumpTo('/StudentDashboard');
 			} else {
 				toast.error("Login failed.", {
 					position: "top-center",

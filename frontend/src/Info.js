@@ -12,9 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { mainListItems, secondaryListItems } from "./studentListItems";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Button from "@material-ui/core/Button";
-import Link from "@material-ui/core/Link";
 
 import TextField from "@material-ui/core/TextField";
 import FormLabel from "@material-ui/core/FormLabel";
@@ -214,16 +212,7 @@ export default function Dashboard() {
 					>
 						Your Information
 					</Typography>
-					<Link href="/home" variants="body2">
-						<Button
-							variant="contained"
-							color="primary"
-							size="large"
-							className={classes.button}
-						>
-							<ExitToAppIcon/>
-						</Button>
-					</Link>
+					
 				</Toolbar>
 			</AppBar>
 			<Drawer
@@ -252,10 +241,6 @@ export default function Dashboard() {
 						   type="Email" value={currentUser.email} disabled/>
 				<TextField variant="outlined" margin="normal" required fullWidth label="Password"
 						   name="password" type="password" value={currentUser.password} onChange={handleFieldChange('password')}/>
-				<TextField variant="outlined" margin="normal" required fullWidth label="Firstname"
-						   name="firstName" value={currentUser.firstName} onChange={handleFieldChange('firstName')}/>
-				<TextField variant="outlined" margin="normal" required fullWidth label="Lastname"
-						   name="lastName" value={currentUser.lastName} onChange={handleFieldChange('lastName')}/>
 				<FormLabel component="legend">Frontend Skills</FormLabel>
 				<FormGroup fullWidth row>
 					{skills.frontend.map(skill =>
