@@ -116,7 +116,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function StudentTableV() {
+export default function StudentData() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {

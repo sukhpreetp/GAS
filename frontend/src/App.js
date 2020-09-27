@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import GroupTable from './groupData.js';
 import StudentPreferences from './StudentPreferences';
 import StudentData from './studentData';
-import StudentDashboard from './StudentDashboard';
+import Dashboard from './StudentDashboard';
 import Info from './Info';
 import {userContext} from './userContext';
 import {createBrowserHistory} from "history";
@@ -53,7 +53,7 @@ class App extends React.Component {
 								<Route path="/viewStudentInfo" component={EnhancedTable}/>
 								<Route path="/studentData" component={StudentData}/>
 								<Route path="/groupData" component={GroupTable}/>
-								<Route path="/StudentDashboard" component={StudentDashboard}/>
+								<Route path="/StudentDashboard" component={Dashboard}/>
 								<Route path="/StuInfo" component={Info}/>
 								<Route path="/StudentPreferences" component={StudentPreferences}/>
 								<Route exact path="/home" component={Home}>
