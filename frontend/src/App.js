@@ -5,6 +5,7 @@ import RegisterSide from "../src/Register";
 import EnhancedTable from "../src/viewStudentInfo";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Home from "./Home";
+import Header from "../src/Header";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import StudentTableV from './studentData.js';
@@ -53,7 +54,10 @@ class App extends React.Component {
 								<Route path="/groupData" component={GroupTable}/>
 								<Route path="/StuInfo" component={Info}/>
 								<Route path="/StudentPreferences" component={StudentPreferences}/>
-								<Route exact path="/" component={Home}/>
+								<Route exact path="/" component={Home}>
+                <Header />
+                <Home />
+              </Route>
 							</Switch>
 						</BrowserRouter>
 						<ToastContainer/>

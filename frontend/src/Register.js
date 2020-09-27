@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     height: "75vh",
   },
   backgroundWhite: {
-    height: "70vh",
+    height: "100vh",
   },
   fab: {
     backgroundColor: theme.palette.primary.main,
