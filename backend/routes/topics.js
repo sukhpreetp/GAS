@@ -6,8 +6,14 @@ router.get('/', function (req, res, next) {
 	const topicRef = db.ref('topics/');
 	topicRef.once('value')
 		.then(data=> {
+			const topicArr = [];
 			data = data.val();
-			res.send(data);
+			for (let key of Object.keys(data)) {
+				let topic = data[key];
+				topic.id = key;
+				topicArr.push(topic);
+			}
+			res.send(topicArr);
 		});
 });
 

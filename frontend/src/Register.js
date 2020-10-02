@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     height: "75vh",
   },
   backgroundWhite: {
-    height: "85vh",
+    height: "100vh",
   },
   fab: {
     backgroundColor: theme.palette.primary.main,
@@ -85,6 +85,8 @@ export default function RegisterSide() {
       studentId: data.get("id"),
       email: data.get("email"),
       password: data.get("password"),
+      firstName: data.get("firstName"),
+      lastName: data.get("lastName"),
     };
     //Send api request in POST method.
     postApi("/users", body).then((res) => {
@@ -171,6 +173,28 @@ export default function RegisterSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+              />
+              <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="First Name"
+                  label="First Name"
+                  name="firstName"
+                  type="string"
+                  autoFocus
+              />
+              <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="Last Name"
+                  label="Last Name"
+                  name="lastName"
+                  type="string"
+                  autoFocus
               />
               {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

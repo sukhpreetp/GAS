@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import clsx from "clsx";
 import {makeStyles} from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -9,15 +9,23 @@ import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import Container from "@material-ui/core/Container";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import { mainListItems, secondaryListItems } from "./studentListItems";
+import {mainListItems, secondaryListItems} from "./studentListItems";
 import Button from "@material-ui/core/Button";
+import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
+import {getApi, postApi, putApi} from "./Api";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import FormLabel from "@material-ui/core/FormLabel";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import Radio from "@material-ui/core/Radio";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormLabel from '@material-ui/core/FormLabel';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
+import {userContext} from "./userContext";
+import {toast} from "react-toastify";
 
 
 const drawerWidth = 240;
@@ -99,11 +107,27 @@ const useStyles = makeStyles((theme) => ({
 	fixedHeight: {
 		height: 240,
 	},
+
+	form: {
+		padding: '20px',
+		marginTop: '70px',
+	}
 }));
 
 export default function Dashboard() {
+	const {user} = useContext(userContext);
 	const classes = useStyles();
 	const [open, setOpen] = React.useState(true);
+	const [topics, setTopics] = React.useState([]);
+	const [topic, setTopic] = React.useState();
+	const [canDoFrontend, setCanDoFrontend] = React.useState(false);
+	const [canDoBackend, setCanDoBackend] = React.useState(false);
+	const [role, setRole] = React.useState(false);
+	// Send get users api and set rows in state.
+	useEffect(() => {
+		getApi('/topics').then(data => setTopics(data));
+	}, []);
+
 	const handleDrawerOpen = () => {
 		setOpen(true);
 	};
@@ -111,10 +135,59 @@ export default function Dashboard() {
 		setOpen(false);
 	};
 
-	const [value, setValue] = React.useState('1. Online Shopping Website');
-	const handleChange = (event) => {
-		setValue(event.target.value);
-	};
+	const handleTopicChange = (event) => {
+		for (let i in topics) {
+			if (topics[i].id === event.target.value) {
+				setTopic(topics[i]);
+				checkCanDo(topics[i]);
+				break;
+			}
+		}
+	}
+
+	const handleRoleChange = (event) => {
+		setRole(event.target.value);
+	}
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		if(!role){
+			return;
+		}
+		const body = {
+			topic:{
+				id: topic.id,
+				name: topic.name,
+			},
+			role,
+		};
+		//Send api request in POST method.
+		postApi("/users/" + user.id + "/topics", body).then((res) => {
+			//Use the response data.
+			if (res.result === "success") {
+				toast.success("You have successfully enrolled in the topic.", {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+				});
+			} else {
+				toast.error("Submission failed.", {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+				});
+			}
+		});
+	}
+
+	const checkCanDo = (topic) => {
+		setCanDoBackend(topic.backend.skills.every(s => user.skills.includes(s)));
+		setCanDoFrontend(topic.frontend.skills.every(s => user.skills.includes(s)));
+	}
 
 	return (
 		<div className={classes.root}>
@@ -143,9 +216,9 @@ export default function Dashboard() {
 						noWrap
 						className={classes.title}
 					>
-						Your Subject Preferences
+						Join Topics
 					</Typography>
-					
+
 				</Toolbar>
 			</AppBar>
 			<Drawer
@@ -166,32 +239,83 @@ export default function Dashboard() {
 				<List>{secondaryListItems}</List>
 			</Drawer>
 			<main className={classes.content}>
-				<div className={classes.appBarSpacer}/>
-				<Container maxWidth="lg" className={classes.container}>
-
-				</Container>
-				<form className={classes.form} noValidate>
-					<FormLabel component="legend">Topic</FormLabel>
-					<RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-						<FormControlLabel value="1.	Online Shopping Website" control={<Radio/>}
-										  label="1. Online Shopping Website"/>
-						<FormControlLabel value="2.	Health Service Mobile Application" control={<Radio/>}
-										  label="2. Health Service Mobile Application"/>
-						<FormControlLabel value="3.	Messaging Mobile Application" control={<Radio/>}
-										  label="3.	Messaging Mobile Application"/>
-						<FormControlLabel value="4.	Restaurant Booking Website" control={<Radio/>}
-										  label="4. Restaurant Booking Website"/>
-						<FormControlLabel value="5.	Weather Website" control={<Radio/>} label="5. Weather Website"/>
-					</RadioGroup>
-					<Button
-						type="submit"
-						fullWidth
-						variant="contained"
-						color="primary"
-						className={classes.submit}
-					>
-						Submit the preference
-					</Button>
+				<form className={classes.form} onSubmit={handleSubmit}>
+					<Grid container spacing={3}>
+						<Grid item xs={12}>
+							<TextField
+								id="outlined-select-currency"
+								select
+								label="Topic"
+								onChange={handleTopicChange}
+								helperText="Please select a topic"
+								variant="outlined"
+								fullWidth
+							>
+								{topics.map((topic) => (
+									<MenuItem key={topic.id} value={topic.id}>
+										{topic.name}
+									</MenuItem>
+								))}
+							</TextField>
+						</Grid>
+						<Grid item xs={6}>
+							<Paper className={classes.paper}>
+								<Grid container spacing={3}>
+									<Grid item xs={12}>
+										Frontend Requirement
+									</Grid>
+									<Grid item xs={12}>
+										<List>
+											{topic && topic.frontend.skills.map(skill => (
+												<ListItem>
+													<ListItemText primary={skill}/>
+												</ListItem>
+											))}
+										</List>
+									</Grid>
+								</Grid>
+							</Paper>
+						</Grid>
+						<Grid item xs={6}>
+							<Paper className={classes.paper}>
+								<Grid container spacing={3}>
+									<Grid item xs={12}>
+										Backend Requirement
+									</Grid>
+									<Grid item xs={12}>
+										<List>
+											{topic && topic.backend.skills.map(skill => (
+												<ListItem>
+													<ListItemText primary={skill}/>
+												</ListItem>
+											))}
+										</List>
+									</Grid>
+								</Grid>
+							</Paper>
+						</Grid>
+						<Grid item xs={12}>
+							<FormLabel component="legend">Role</FormLabel>
+							<RadioGroup name="role" onChange={handleRoleChange}>
+								<FormControlLabel value="frontend" disabled={!canDoFrontend} control={<Radio/>}
+												  label="Frontend"/>
+								<FormControlLabel value="backend" disabled={!canDoBackend} control={<Radio/>}
+												  label="Backend"/>
+							</RadioGroup>
+						</Grid>
+						<Grid item xs={12}>
+							<Button
+								type="submit"
+								fullWidth
+								variant="contained"
+								color="primary"
+								className={classes.submit}
+								disabled={!role}
+							>
+								Submit the preference
+							</Button>
+						</Grid>
+					</Grid>
 				</form>
 			</main>
 		</div>
