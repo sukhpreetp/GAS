@@ -74,6 +74,10 @@ router.post('/:userId/topics', function (req, res, next) {
 						user: {
 							id: req.params.userId,
 							email: currentUser.email,
+							studentId: currentUser.studentId,
+							firstName: currentUser.firstName,
+							lastName: currentUser.lastName,
+							skills: currentUser.skills,
 						},
 						role: req.body.role,
 						grouped: false,

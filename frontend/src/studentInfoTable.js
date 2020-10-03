@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {lighten, makeStyles, withStyles} from '@material-ui/core/styles';
@@ -20,7 +20,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import CreateGroup from './groupConfirmation.js';
-import {getApi} from "./Api";
 
 function createData(name, calories, fat, carbs, protein) {
 	return {name, calories, fat, carbs, protein};
@@ -56,7 +55,7 @@ const headCells = [
 	{id: 'sid', disablePadding: true, align: 'left', label: 'Student ID'},
 	{id: 'email', disablePadding: false, align: 'left', label: 'Email'},
 	{id: 'skills', disablePadding: false, align: 'left', label: 'Skills'},
-	{id: 'topicpref', disablePadding: false, align: 'left', label: 'Topic Preferences'},
+	{id: 'role', disablePadding: false, align: 'left', label: 'Role'},
 ];
 
 function EnhancedTableHead(props) {
@@ -114,82 +113,17 @@ EnhancedTableHead.propTypes = {
 };
 
 const useToolbarStyles = makeStyles((theme) => ({
-	root: {
-		paddingLeft: theme.spacing(2),
-		paddingRight: theme.spacing(1),
-		backgroundColor: theme.palette.primary.dark,
 
-	},
-	space: {
-		paddingTop: '10vh'
-	},
-	highlight:
-		theme.palette.type === 'dark'
-			? {
-				color: theme.palette.primary.main,
-				backgroundColor: lighten(theme.palette.primary.light, 0.85),
-			}
-			: {
-				color: theme.palette.primary.main,
-				backgroundColor: theme.palette.primary.main,
-			},
-	title: {
-		flex: '1 1 100%',
-		color: 'white'
-	},
-	icon: {
-		color: 'white'
-	}
 }));
-
-const EnhancedTableToolbar = (props) => {
-	const classes = useToolbarStyles();
-	const {numSelected} = props;
-
-	return (
-		<Toolbar
-			className={clsx(classes.root, {
-				[classes.highlight]: numSelected > 0,
-			})}
-		>
-			{numSelected > 0 ? (
-				<Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
-					{numSelected} selected
-				</Typography>
-			) : (
-				<Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-					Student Information
-				</Typography>
-			)}
-
-			{numSelected > 0 ? (
-					<Tooltip title="Create Group">
-						{/* <IconButton aria-label="Create Group" >
-            <GroupAddIcon className={classes.icon} fontSize="large" />
-          </IconButton> */}
-						<CreateGroup/>
-					</Tooltip>
-				)
-				: (
-					<Tooltip>
-						<IconButton aria-label="Create Group" disabled="true">
-							<GroupAddIcon className={classes.icon} fontSize="large"/>
-						</IconButton>
-					</Tooltip>
-				)
-			}
-		</Toolbar>
-	);
-};
-
-EnhancedTableToolbar.propTypes = {
-	numSelected: PropTypes.number.isRequired,
-};
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		width: '100%',
-
+	},
+	header: {
+		paddingLeft: theme.spacing(2),
+		paddingRight: theme.spacing(1),
+		backgroundColor: theme.palette.primary.dark,
 	},
 	paper: {
 		width: '100%',
@@ -213,9 +147,30 @@ const useStyles = makeStyles((theme) => ({
 		top: 20,
 		width: 1,
 	},
+	space: {
+		paddingTop: '10vh'
+	},
+	highlight:
+		theme.palette.type === 'dark'
+			? {
+				color: theme.palette.primary.main,
+				backgroundColor: lighten(theme.palette.primary.light, 0.85),
+			}
+			: {
+				color: theme.palette.primary.main,
+				backgroundColor: theme.palette.primary.main,
+			},
+	title: {
+		flex: '1 1 100%',
+		color: 'white'
+	},
+	icon: {
+		color: 'white'
+	}
 }));
 
-export default function StudentTable() {
+
+export default function StudentTable(props) {
 	const classes = useStyles();
 	const [order, setOrder] = React.useState('asc');
 	const [orderBy, setOrderBy] = React.useState('sid');
@@ -223,12 +178,7 @@ export default function StudentTable() {
 	const [page, setPage] = React.useState(0);
 	const [dense, setDense] = React.useState(false);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
-	const [rows, setRows] = React.useState([]);
-
-	// Send get users api and set rows in state.
-	useEffect(() => {
-		getApi('/users').then(data => setRows(data));
-	}, []);
+	const {rows, topic} = props;
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === 'asc';
@@ -279,7 +229,6 @@ export default function StudentTable() {
 	};
 
 	const isSelected = (name) => selected.indexOf(name) !== -1;
-
 	const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
 	const StyledTableRow = withStyles((theme) => ({
@@ -292,20 +241,45 @@ export default function StudentTable() {
 			}
 		},
 	}))(TableRow);
-
 	return (
 		<div className={classes.root}>
 			<div className={classes.space}>
 
 			</div>
 			<Paper className={classes.paper} elevation={15}>
-				<EnhancedTableToolbar numSelected={selected.length}/>
+				<Toolbar
+					className={clsx(classes.header, {
+						[classes.highlight]: selected.length > 0,
+					})}
+				>
+					{selected.length > 0 ? (
+						<Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
+							{selected.length} selected
+						</Typography>
+					) : (
+						<Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+							Student Information
+						</Typography>
+					)}
+
+					{selected.length > 0 ? (
+							<Tooltip title="Create Group">
+								<CreateGroup userList={selected} topic={topic}/>
+							</Tooltip>
+						)
+						: (
+							<Tooltip>
+								<IconButton disabled="true">
+									<GroupAddIcon className={classes.icon} fontSize="large"/>
+								</IconButton>
+							</Tooltip>
+						)
+					}
+				</Toolbar>
 				<TableContainer>
 					<Table
 						className={classes.table}
-						aria-labelledby="tableTitle"
 						size={dense ? 'small' : 'medium'}
-						aria-label="enhanced table"
 					>
 						<EnhancedTableHead
 							classes={classes}
@@ -320,32 +294,31 @@ export default function StudentTable() {
 							{stableSort(rows, getComparator(order, orderBy))
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 								.map((row, index) => {
-									const isItemSelected = isSelected(row.name);
+									const isItemSelected = isSelected(row.user.id);
 									const labelId = `enhanced-table-checkbox-${index}`;
 
 									return (
 										<StyledTableRow
 											hover
-											onClick={(event) => handleClick(event, row.name)}
+											onClick={(event) => handleClick(event, row.user.id)}
 											role="checkbox"
 											aria-checked={isItemSelected}
 											tabIndex={-1}
-											key={row.name}
+											key={row.user.id}
 											selected={isItemSelected}
 										>
 											<TableCell padding="checkbox">
 												<Checkbox
 													checked={isItemSelected}
 													color="primary"
-													inputProps={{'aria-labelledby': labelId}}
 												/>
 											</TableCell>
 											<TableCell component="th" id={labelId} scope="row" padding="none">
-												{row.studentId}
+												{row.user.studentId}
 											</TableCell>
-											<TableCell align="left">{row.email}</TableCell>
-											<TableCell align="left">{row.skills?row.skills.join(', '):''}</TableCell>
-											<TableCell align="left">{row.topics?row.topics.flatMap(t=>t.topicName).join(', '):''}</TableCell>
+											<TableCell align="left">{row.user.email}</TableCell>
+											<TableCell align="left">{row.user.skills ? row.user.skills.join(', ') : ''}</TableCell>
+											<TableCell align="left">{row.role}</TableCell>
 										</StyledTableRow>
 									);
 								})}
@@ -373,5 +346,6 @@ export default function StudentTable() {
 
 			/>
 		</div>
-	);
+	)
+
 }

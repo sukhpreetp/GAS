@@ -185,8 +185,9 @@ export default function Dashboard() {
 	}
 
 	const checkCanDo = (topic) => {
-		setCanDoBackend(topic.backend.skills.every(s => user.skills.includes(s)));
-		setCanDoFrontend(topic.frontend.skills.every(s => user.skills.includes(s)));
+		const userSkills = user.skills?user.skills:[];
+		setCanDoBackend(topic.backend.skills.every(s => userSkills.includes(s)));
+		setCanDoFrontend(topic.frontend.skills.every(s => userSkills.includes(s)));
 	}
 
 	return (
