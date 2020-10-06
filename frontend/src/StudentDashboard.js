@@ -15,23 +15,24 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { mainListItems, secondaryListItems } from "./studentListItems";
 import Link from "@material-ui/core/Link";
+import bg from './teamwork.jpg';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
+  bg: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+    height: "100%",
+		// height: "80vh",
+		// marginTop: "80px",
+		backgroundImage: `url(${bg})`,
+        backgroundPosition: 'center', 
+        backgroundSize: 'cover', 
+        backgroundRepeat: 'no-repeat'
+		// paddingTop: '10vh'
+	},
   root: {
     display: "flex",
   },
@@ -147,7 +148,7 @@ export default function Dashboard() {
             noWrap
             className={classes.title}
           >
-            Welcome To Dashboard!
+            Welcome To Your Dashboard!
           </Typography>
         </Toolbar>
       </AppBar>
@@ -170,10 +171,11 @@ export default function Dashboard() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Box pt={4}>
-            <Copyright />
-          </Box>
+        <Container maxWidth="lg" className={classes.bg}>
+      {/* <div className={classes.bg}>
+
+      </div>
+        */}
         </Container>
       </main>
     </div>
