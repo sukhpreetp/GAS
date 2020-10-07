@@ -19,7 +19,7 @@ export default function Home() {
         <h2>Meet Like Minded Students on Example Now.</h2>
         <h3>
           Join hundreds of other University Students on Example Now. Group
-          Allocations generated in under 3 minutes!
+          allocations generated in under 3 minutes!
         </h3>
         <Link href="/register">
           <button className="home__bannerButton">Register Now</button>

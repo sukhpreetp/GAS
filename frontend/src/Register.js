@@ -13,12 +13,20 @@ import HomeIcon from "@material-ui/icons/Home";
 import { postApi } from "./Api";
 import { toast } from "react-toastify";
 import { Redirect } from "react-router-dom";
+import Header from "./Header.js";
+import bg from './blue.jpg';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "110vh",
-    marginTop: 0,
+    marginTop: "80px",
+    marginBottom: "20px",
     paddingTop: "0vh",
+    paddingBottom: "0px",
+    backgroundImage: `url(${bg})`,
+    backgroundPosition: 'center', 
+    backgroundSize: 'cover', 
+    backgroundRepeat: 'no-repeat'
   },
   extendedIcon: {
     marginRight: theme.spacing(1),
@@ -31,21 +39,27 @@ const useStyles = makeStyles((theme) => ({
     height: "75vh",
   },
   backgroundWhite: {
-    height: "100vh",
+    height: "100%",
+    // marginBottom: "100px"
+    // marginBottom: theme.spacing(1),
+    // paddingBottom: "20px"
   },
   fab: {
     backgroundColor: theme.palette.primary.main,
   },
-  image: {
-    backgroundImage: `url(${"frontendsrcimages\teamwork.jpg"})`,
-    backgroundRepeat: "no-repeat",
-    // backgroundColor:
-    //   theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-    // backgroundSize: 'cover',
-    // backgroundPosition: 'center',
-  },
+  // image: {
+  //   backgroundImage: `url(${"frontendsrcimages\teamwork.jpg"})`,
+  //   backgroundRepeat: "no-repeat",
+  //   // backgroundColor:
+  //   //   theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+  //   // backgroundSize: 'cover',
+  //   // backgroundPosition: 'center',
+  // },
   paper: {
-    margin: theme.spacing(8, 4),
+    // margin: theme.spacing(8, 4),
+    marginTop: "40px",
+    marginLeft: "40px",
+    marginRight: "40px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -61,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
+    height: "100%"
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -115,6 +130,7 @@ export default function RegisterSide() {
   return (
     <div>
       {toLogin && <Redirect to="/loginPage" />}
+      <Header/>
       <Grid
         container
         direction="row"
@@ -196,10 +212,6 @@ export default function RegisterSide() {
                   type="string"
                   autoFocus
               />
-              {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
               <p className={classes.p}>
                 By Clicking "Create Student Account", you Agree to our Terms of
                 Service and Privacy Policy.
@@ -217,17 +229,15 @@ export default function RegisterSide() {
                 <Grid item xs>
                   <Link href="loginpage" variant="body2">
                     Already have an Account? Click here to Sign In.
+
                   </Link>
                 </Grid>
               </Grid>
             </form>
           </div>
         </Grid>
-        {/* <Grid item xs={false} sm={1} md={2}>
-      <img src={logo} />
-      </Grid> */}
       </Grid>
-      <Link href="/home" variants="body2">
+      <Link href="/" variants="body2">
         <Button
           variant="contained"
           color="primary"

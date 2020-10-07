@@ -86,8 +86,12 @@ const useStyles = makeStyles((theme) => ({
 	appBarSpacer: theme.mixins.toolbar,
 	content: {
 		flexGrow: 1,
+		marginLeft: "100px",
+		marginRight: "100px",
+		marginTop: "50px",
+		marginBottom: "50px",
 		height: "100vh",
-		overflow: "auto",
+		// overflow: "auto",
 	},
 	container: {
 		paddingTop: theme.spacing(4),
@@ -102,6 +106,13 @@ const useStyles = makeStyles((theme) => ({
 	fixedHeight: {
 		height: 240,
 	},
+	save: {
+		marginTop: "40px"
+	},
+	savee: {
+		marginTop: "40px",
+		marginBottom: "40px"
+	}
 }));
 
 export default function Dashboard() {
@@ -159,7 +170,7 @@ export default function Dashboard() {
 		putApi("/users/" + currentUser.id, body).then((res) => {
 			//Use the response data.
 			if (res.result === "success") {
-				toast.success("User has benn updated successfully.", {
+				toast.success("User has been updated successfully.", {
 					position: "top-center",
 					autoClose: 5000,
 					hideProgressBar: false,
@@ -245,21 +256,22 @@ export default function Dashboard() {
 						   name="firstName" value={currentUser.firstName} onChange={handleFieldChange('firstName')}/>
 				<TextField variant="outlined" margin="normal" required fullWidth label="Lastname"
 						   name="lastName" value={currentUser.lastName} onChange={handleFieldChange('lastName')}/>
-				<FormLabel component="legend">Frontend Skills</FormLabel>
+				
+				<FormLabel className={classes.save} component="legend">Frontend Skills</FormLabel>
 				<FormGroup fullWidth row>
 					{skills.frontend.map(skill =>
 						<FormControlLabel
-							control={<Checkbox checked={selectedSkills.includes(skill)}
+							control={<Checkbox color="primary" checked={selectedSkills.includes(skill)}
 											   onChange={handleSkillChange} name="skills" value={skill}/>}
 							label={skill}
 						/>
 					)}
 				</FormGroup>
-				<FormLabel component="legend">Backend Skills</FormLabel>
+				<FormLabel className={classes.save} component="legend">Backend Skills</FormLabel>
 				<FormGroup fullWidth row>
 					{skills.backend.map(skill =>
 						<FormControlLabel
-							control={<Checkbox checked={selectedSkills.includes(skill)}
+							control={<Checkbox color="primary" checked={selectedSkills.includes(skill)}
 											   onChange={handleSkillChange} name="skills" value={skill}/>}
 							label={skill}
 						/>
@@ -270,7 +282,7 @@ export default function Dashboard() {
 					fullWidth
 					variant="contained"
 					color="primary"
-					className={classes.save}
+					className={classes.savee}
 				>
 					Save Student Information
 				</Button>

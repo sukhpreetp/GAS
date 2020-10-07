@@ -14,10 +14,18 @@ import Link from "@material-ui/core/Link";
 import HomeIcon from "@material-ui/icons/Home";
 import {userContext} from './userContext';
 import {Redirect} from "react-router-dom";
+import Header from "./Header.js";
+import bg from './blue.jpg';
+
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		height: "80vh",
+		marginTop: "80px",
+		backgroundImage: `url(${bg})`,
+        backgroundPosition: 'center', 
+        backgroundSize: 'cover', 
+        backgroundRepeat: 'no-repeat'
 		// paddingTop: '10vh'
 	},
 	extendedIcon: {
@@ -36,14 +44,14 @@ const useStyles = makeStyles((theme) => ({
 	fab: {
 		backgroundColor: theme.palette.primary.main,
 	},
-	image: {
-		backgroundImage: `url(${"frontendsrcimages\teamwork.jpg"})`,
-		backgroundRepeat: "no-repeat",
-		// backgroundColor:
-		//   theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-		// backgroundSize: 'cover',
-		// backgroundPosition: 'center',
-	},
+	// image: {
+	// 	backgroundImage: {`url(${blueGrey})`},
+	// 	backgroundRepeat: "no-repeat",
+	// 	// backgroundColor:
+	// 	//   theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+	// 	// backgroundSize: 'cover',
+	// 	// backgroundPosition: 'center',
+	// },
 	paper: {
 		margin: theme.spacing(8, 4),
 		display: "flex",
@@ -117,6 +125,7 @@ export default function SignInSide() {
 			{({user, setUser}) => {
 				return (
 					<div>
+						<Header/>
 						<Grid
 							container
 							direction="row"
@@ -191,7 +200,7 @@ export default function SignInSide() {
 							</Grid>
 						</Grid>
 						{jumpTo && <Redirect to={jumpTo}/>}
-						<Link href="/home" variants="body2">
+						<Link href="/" variants="body2">
 							<Button
 								variant="contained"
 								color="primary"
